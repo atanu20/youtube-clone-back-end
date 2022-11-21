@@ -25,7 +25,7 @@ app.use(fileUpload());
 
 app.use('/profile', express.static(path.join(__dirname, 'public/profile')));
 router.get('/', (req, res) => {
-  res.send('hii');
+  res.send('update code');
 });
 router.post('/register', async (req, res) => {
   try {
@@ -85,16 +85,14 @@ router.post('/login', async (req, res) => {
           const token = jwt.sign({ id }, 'youtubeclone', {
             expiresIn: 60 * 60 * 24,
           });
-          res
-            .status(200)
-            .send({
-              login: true,
-              token: token,
-              username: exist.username,
-              name: exist.name,
-              userID: exist._id,
-              userEmail: exist.email,
-            });
+          res.status(200).send({
+            login: true,
+            token: token,
+            username: exist.username,
+            name: exist.name,
+            userID: exist._id,
+            userEmail: exist.email,
+          });
           // res.send({login:true,username:exist.username})
         } else {
           res.send({ login: false, msg: 'Wrong Password' });
